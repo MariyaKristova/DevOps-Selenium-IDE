@@ -18,20 +18,21 @@ public class TC01IfUserIsInvalidTryAgainTest
     public IDictionary<string, object> vars { get; private set; }
     private IJavaScriptExecutor js;
 
-    [SetUp]
-    public void SetUp()
-    {
-        ChromeOptions options = new ChromeOptions();
-        options.AddArguments("headless");
-        options.AddArguments("no-sandbox");
-        options.AddArguments("disable-dev-shm-usage");
-        options.AddArguments("disable-gpu");
-        options.AddArguments("window-size=1920x1080");
-
-        driver = new ChromeDriver();
-        js = (IJavaScriptExecutor)driver;
-        vars = new Dictionary<string, object>();
-    }
+[SetUp]
+public void SetUp()
+{
+    ChromeOptions options = new ChromeOptions();
+    options.AddArguments("--headless");  
+    options.AddArguments("--no-sandbox");
+    options.AddArguments("--disable-dev-shm-usage");
+    options.AddArguments("--disable-gpu");
+    options.AddArguments("--window-size=1920x1080");
+    options.AddArguments("--user-data-dir=/tmp/chrome-user-data"); 
+    
+    driver = new ChromeDriver(options); 
+    js = (IJavaScriptExecutor)driver;
+    vars = new Dictionary<string, object>();
+}
 
     [TearDown]
     protected void TearDown()
